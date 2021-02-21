@@ -1,6 +1,38 @@
 .submitButton {
-  border: 2px solid #037ef3;
-  background-color: #daedff;
+  border: 2px solid #40a3ff;
+  background-color: #40a3ff;
+  border-radius: 4px;
+  padding: 5px 10px;
   color: rgb(36, 36, 36);
   font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.submitButton:hover {
+  background-color: #037ef3;
+}
+
+.titleBox {
+  width: 40%;
+  padding: 6px 10px;
+  box-sizing: border-box;
+  border: 2px solid #aed8ff;
+  border-radius: 4px;
+  background-color: #f4f9ff;
+}
+
+.descriptionBox {
+  width: 70%;
+  height: 80px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #aed8ff;
+  border-radius: 4px;
+  background-color: #f4f9ff;
+  resize: none;
+}
+
+.descriptionBox:focus-visible {
+  border: 2px solid #037ef3;
 }

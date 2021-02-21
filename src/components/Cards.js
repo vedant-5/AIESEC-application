@@ -64,12 +64,13 @@ function Cards(){
        
         <div >
             <Dialogue
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-            />
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                />
              {opps.map((val)=>{
             return(
                 <Container style={{marginBottom: "10px"}}>
+                    
                 <Layout key={val.id} onClick={() => setModalShow(true)}>
                     <div style= {{gridRow:"1/5"}}>
                         <img 

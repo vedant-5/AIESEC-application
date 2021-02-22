@@ -2,7 +2,6 @@ import React from "react";
 
 import Navbar from './components/navbar';
 import Filter from "./components/Filter";
-import CardList from "./CardList";
 import Cards from "./components/Cards";
 
 import {

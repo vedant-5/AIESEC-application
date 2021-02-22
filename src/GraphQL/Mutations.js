@@ -1,6 +1,6 @@
 import {useMutation,gql} from "@apollo/client";
 
-const UPDATE_MUTATION = gql`
+const UPDATE_OPPORTUNITY = gql`
     mutation PostMutation(
         $title: String!
         $description: String!
@@ -13,4 +13,4 @@ const UPDATE_MUTATION = gql`
     }
 `
 
-export default UPDATE_MUTATION;
+export default UPDATE_OPPORTUNITY;

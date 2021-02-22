@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect,useState} from "react";
 import styled from "styled-components";
 
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
+
+import {LOAD_OPPS} from "../GraphQL/Queries"
 
 
 import "../styles/dialogue.css";
@@ -16,8 +17,22 @@ const DescriptionInput = styled.div`
 
 
 function Dialogue(props) {
+    const [title,setTitle]= useState('')
+    const [description,setDescription] = useState('')
 
     
+    const changeTitle = (e)=>{
+      setTitle(e.target.value)
+    }
+
+    const changeDescription = (e)=>{
+      setDescription(e.target.value)
+    }
+
+    const changedData = ()=>{
+      props.updateTitle(title)
+      props.updateDescription(description)
+    }
     return (
       <Modal
         {...props}
@@ -36,19 +51,24 @@ function Dialogue(props) {
               <TitleInput>
                 <p style={{marginBottom:"3px"}}>Title</p>
                 <input 
-                    className="titleBox"/>
+                    placeholder={props.title}
+                    className="titleBox"
+                    onChange={changeTitle}
+                />
               </TitleInput>
               
               <DescriptionInput>
                 <p style={{marginBottom:"3px"}}>Description</p>
                 <textarea 
-                    className="descriptionBox"/>
+                    placeholder={props.description}
+                    className="descriptionBox"
+                    onChange={changeDescription}/>
               </DescriptionInput> 
 
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <button className="submitButton" onClick={props.onHide}>Submit Changes</button>
+          <button className="submitButton" onClick={changedData(),props.onHide}>Submit Changes</button>
         </Modal.Footer>
       </Modal>
     );

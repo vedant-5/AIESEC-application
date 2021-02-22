@@ -11,6 +11,7 @@ import location from "./Images/location.svg";
 import circle from "./Images/circle.svg";
 
 import { Container} from "@material-ui/core";
+import { roundToNearestMinutes } from "date-fns";
 
 const Layout = styled.div`
     display: grid;
@@ -46,13 +47,18 @@ const LocationLabel = styled.span`
 ////DIALOGUE BOX////
 ///////////////////
 
-function Cards(){
+function Cards(props){
 
-    const [modalShow, setModalShow] = React.useState(false);
-
-    const {error,loading,data} = useQuery(LOAD_OPPS)
+    const [modalShow, setModalShow] = useState(false);
+    const {error,loading,data} = useQuery(LOAD_OPPS);
     const[opps, setOpps] = useState([]);
     const [num,setNum] = useState('');
+    const [clickedID,setClickedID] = useState(null);
+    const [clickedTitle, setTitle] = useState("");
+    const [clickedDescription, setDescription] = useState("");
+
+    const [updatetitle,newTitle] = useState('')
+    const [updatedescription,newDescription] = useState('')
 
     useEffect(()=>{
         if(data){
@@ -62,30 +68,44 @@ function Cards(){
         console.log(data)
     }, [data])
 
+
+    const updateTitle = (data)=>{
+        newTitle(data)
+    }
+
+    const updateDescription = (data)=>{
+        newDescription(data)
+    }
+
+    console.log(updateTitle,updateDescription)
+
     return(
-        <div >
-            <Dialogue
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-            />
+        <div>
             <Container style={{marginBottom: "20px"}}>
-                <p style={{marginLeft:"125px",marginBottom :"5px", fontSize:"0.9em"}}>Total Opportunities: <span style={{fontWeight:"600"}}>{num.total_items}</span></p>  
+                <p style={{marginLeft:"125px",marginBottom :"5px", fontSize:"0.9em"}}>
+                    Total Opportunities: <span style={{fontWeight:"600"}}>{num.total_items}</span>
+                </p>  
+
                 <hr style={{width:"80%",margin:"auto", borderBottom:"1px solid #40a3ff"}}/>
             </Container>
             
              {opps.map((val)=>{
             return(
-                <div>
-                    <Container key={val.id} style={{marginBottom: "10px"}}>
-                    <Layout key={val.id} onClick={() => setModalShow(true)}>
+                <div onClick={()=>(setClickedID(val.id),setTitle(val.title), setDescription(val.description))} key={val.id}>
+                    <Container style={{marginBottom: "10px"}}>
+                    <Layout onClick={() => setModalShow(true)}>
                         <div style= {{gridRow:"1/5"}}>
                             <img 
                             style={{width: "250px", 
                                     height: "141.5px", 
                                     objectFit : "cover", 
-                                    borderRadius: "10px"}} key={val.id} src={val.cover_photo.url}/>
+                                    borderRadius: "10px"}} 
+                            src={val.cover_photo.url}/>
                         </div>
-                        <div style={{display: "inline-flex",position:"relative",height:"28px"}}>
+                        <div 
+                        style={{display: "inline-flex",
+                                position:"relative",
+                                height:"28px"}}>
                             <HeadLabel key={val.id}>
                                 {val.title}
                             </HeadLabel>
@@ -115,7 +135,15 @@ function Cards(){
             </div>
             )
         })}
-            
+            <Dialogue
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                id = {clickedID}
+                title = {clickedTitle}
+                description = {clickedDescription}
+                updateTitle = {(data)=>updateTitle(data)}
+                updateDescription = {(data)=>updateDescription(data)}
+            />
             
         </div>
     )

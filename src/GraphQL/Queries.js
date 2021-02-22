@@ -4,6 +4,7 @@ export const LOAD_OPPS = gql`
     query{
         allOpportunity{
                 data{
+                    id
                     title
                     description
                     cover_photo
@@ -16,6 +17,11 @@ export const LOAD_OPPS = gql`
                         name
                     }
                     available_openings
+              }
+              paging{
+                current_page
+                total_pages  
+                total_items
               }
             }
         }

@@ -11,9 +11,10 @@ import Row from 'react-bootstrap/Row';
 const Nav = styled.nav`
     background:#037ef3;
     height: 80px;
-    box-shadow:  0px 6px 12px -6px rgba(0,0,0,0.30);
+    box-shadow:  0px 6px 12px -6px rgba(0,0,0,0.50);
     align-items: center;
-    justify-content: center
+    justify-content: center;
+    
 `
 
 const LogIn = styled.a`

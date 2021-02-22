@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
     padding-top:10px;
     background-color: #f3f4f7;
     margin-bottom: 80px;
+    z-index: 1
   `
   const Span = styled.span`
     margin-right:20px;

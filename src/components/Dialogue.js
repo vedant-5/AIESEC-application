@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+
 
 import "../styles/dialogue.css";
 
@@ -15,6 +16,8 @@ const DescriptionInput = styled.div`
 
 
 function Dialogue(props) {
+
+    
     return (
       <Modal
         {...props}
@@ -28,16 +31,20 @@ function Dialogue(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body >
-          <form style={{marginLeft:"20px"}}>
+          <form style={{marginLeft:"20px"}} >
+
               <TitleInput>
                 <p style={{marginBottom:"3px"}}>Title</p>
-                <input className="titleBox"/>
+                <input 
+                    className="titleBox"/>
               </TitleInput>
               
               <DescriptionInput>
                 <p style={{marginBottom:"3px"}}>Description</p>
-                <textarea className="descriptionBox"/>
+                <textarea 
+                    className="descriptionBox"/>
               </DescriptionInput> 
+
           </form>
         </Modal.Body>
         <Modal.Footer>

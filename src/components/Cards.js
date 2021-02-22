@@ -52,60 +52,67 @@ function Cards(){
 
     const {error,loading,data} = useQuery(LOAD_OPPS)
     const[opps, setOpps] = useState([]);
+    const [num,setNum] = useState('');
 
     useEffect(()=>{
         if(data){
             setOpps(data.allOpportunity.data);
+            setNum(data.allOpportunity.paging)
         }
         console.log(data)
     }, [data])
 
     return(
-       
         <div >
             <Dialogue
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                />
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
+            <Container style={{marginBottom: "20px"}}>
+                <p style={{marginLeft:"125px",marginBottom :"5px", fontSize:"0.9em"}}>Total Opportunities: <span style={{fontWeight:"600"}}>{num.total_items}</span></p>  
+                <hr style={{width:"80%",margin:"auto", borderBottom:"1px solid #40a3ff"}}/>
+            </Container>
+            
              {opps.map((val)=>{
             return(
-                <Container style={{marginBottom: "10px"}}>
-                    
-                <Layout key={val.id} onClick={() => setModalShow(true)}>
-                    <div style= {{gridRow:"1/5"}}>
-                        <img 
-                        style={{width: "250px", 
-                                height: "141.5px", 
-                                objectFit : "cover", 
-                                borderRadius: "10px"}} src={val.cover_photo.url}/>
-                    </div>
-                    <div style={{display: "inline-flex",position:"relative",height:"28px"}}>
-                        <HeadLabel>
+                <div>
+                    <Container key={val.id} style={{marginBottom: "10px"}}>
+                    <Layout key={val.id} onClick={() => setModalShow(true)}>
+                        <div style= {{gridRow:"1/5"}}>
+                            <img 
+                            style={{width: "250px", 
+                                    height: "141.5px", 
+                                    objectFit : "cover", 
+                                    borderRadius: "10px"}} key={val.id} src={val.cover_photo.url}/>
+                        </div>
+                        <div style={{display: "inline-flex",position:"relative",height:"28px"}}>
+                            <HeadLabel key={val.id}>
+                                {val.title}
+                            </HeadLabel>
+                            <img style= {{position:"absolute", right:"10px"}} src={bookmark}/>
+                        </div>
+                        <div>
+                        <LocationLabel>
+                            <img src={location} style={{marginRight:"5px"}} key={val.id}/>
+                                {val.location} 
+                        </LocationLabel>
+                        </div>
+                        <div>
+                            <DescriptionLabel key={val.id}>
+                                {val.description}
+                            </DescriptionLabel>
+                        </div>
+                        <div 
+                        style={{display:"inline-flex", 
+                                placeItems: "center", 
+                                color:"#7d7d7d", 
+                                fontSize:"0.9em"}}>
+                            <img src={circle} style={{marginRight:"5px"}} key={val.id} />
                             {val.title}
-                        </HeadLabel>
-                        <img style= {{position:"absolute", right:"10px"}} src={bookmark}/>
-                    </div>
-                    <div>
-                      <LocationLabel>
-                          <img src={location} style={{marginRight:"5px"}} />
-                              {val.location} 
-                      </LocationLabel>
-                    </div>
-                    <div>
-                        <DescriptionLabel>
-                            {val.description}
-                        </DescriptionLabel>
-                    </div>
-                    <div 
-                    style={{display:"inline-flex", 
-                            placeItems: "center", 
-                            color:"#7d7d7d", 
-                            fontSize:"0.9em"}}>
-                        <img src={circle} style={{marginRight:"5px"}}/>
-                        {val.title}
-                    </div>
-                </Layout>
-            </Container>
+                        </div>
+                    </Layout>
+                </Container>    
+            </div>
             )
         })}
             

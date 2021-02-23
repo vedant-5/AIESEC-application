@@ -69,15 +69,20 @@ function Cards(props){
     }, [data])
 
 
-    const updateTitle = (data)=>{
-        newTitle(data)
-    }
+   const updatedTitle = (data) =>{
+       newTitle(data)
+       setTitle(updatetitle)
+       console.log(data)
+   }
 
-    const updateDescription = (data)=>{
-        newDescription(data)
-    }
+   const updatedDescription = (data) =>{
+       newDescription(data)
+       setDescription(updatedescription)
+       console.log(data)
+   }
 
-    console.log(updateTitle,updateDescription)
+
+
 
     return(
         <div>
@@ -141,8 +146,8 @@ function Cards(props){
                 id = {clickedID}
                 title = {clickedTitle}
                 description = {clickedDescription}
-                updateTitle = {(data)=>updateTitle(data)}
-                updateDescription = {(data)=>updateDescription(data)}
+                updatedTitle = {updatedTitle}
+                updatedDescription = {updatedDescription}
             />
             
         </div>

@@ -29,10 +29,15 @@ function Dialogue(props) {
       setDescription(e.target.value)
     }
 
-    const changedData = ()=>{
-      props.updateTitle(title)
-      props.updateDescription(description)
+    const changedTitle = ()=>{
+      props.updatedTitle(title)
     }
+
+    const changedDescription = ()=>{
+      props.updatedDescription(description)
+    }
+
+
     return (
       <Modal
         {...props}
@@ -68,7 +73,7 @@ function Dialogue(props) {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <button className="submitButton" onClick={changedData(),props.onHide}>Submit Changes</button>
+          <button className="submitButton" onClick={changedTitle(),changedDescription(),props.onHide}>Submit Changes</button>
         </Modal.Footer>
       </Modal>
     );

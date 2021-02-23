@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     padding-top:10px;
     background-color: #f3f4f7;
     margin-bottom: 80px;
-    z-index: 1
+    margin-top:80px
   `
   const Span = styled.span`
     margin-right:20px;
@@ -94,7 +94,7 @@ function Filter() {
         <FilterBar>
             <Container>
             <Row>
-                <Col style= {{ display: "inline-flex", placeItems: "center"}}>
+                <Col style= {{ display: "inline-flex", placeItems: "center",zIndex:"0"}}>
                 <Span>
                     <FormControl variant="outlined" color="primary" className={classes.formControl}>
                         <InputLabel color="primary" id="demo-simple-select-outlined-label">Explore</InputLabel>

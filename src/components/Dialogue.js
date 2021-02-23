@@ -20,7 +20,7 @@ function Dialogue(props) {
     const [title,setTitle]= useState('')
     const [description,setDescription] = useState('')
 
-    
+    /*
     const changeTitle = (e)=>{
       setTitle(e.target.value)
     }
@@ -35,7 +35,7 @@ function Dialogue(props) {
 
     const changedDescription = ()=>{
       props.updatedDescription(description)
-    }
+    }*/
 
 
     return (
@@ -58,7 +58,7 @@ function Dialogue(props) {
                 <input 
                     placeholder={props.title}
                     className="titleBox"
-                    onChange={changeTitle}
+                    //onChange={changeTitle}
                 />
               </TitleInput>
               
@@ -67,13 +67,14 @@ function Dialogue(props) {
                 <textarea 
                     placeholder={props.description}
                     className="descriptionBox"
-                    onChange={changeDescription}/>
+                    //onChange={changeDescription}
+                  />
               </DescriptionInput> 
 
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <button className="submitButton" onClick={changedTitle(),changedDescription(),props.onHide}>Submit Changes</button>
+          <button className="submitButton" onClick={props.onHide}>Submit Changes</button>
         </Modal.Footer>
       </Modal>
     );

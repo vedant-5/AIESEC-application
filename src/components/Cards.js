@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import Dialogue from "./Dialogue";
 
+
 import { useQuery, gql} from "@apollo/client";
 import {LOAD_OPPS} from "../GraphQL/Queries"
 
@@ -10,8 +11,12 @@ import bookmark from "./Images/bookmark.svg";
 import location from "./Images/location.svg";
 import circle from "./Images/circle.svg";
 
-import { Container} from "@material-ui/core";
-import { roundToNearestMinutes } from "date-fns";
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import { Container } from "@material-ui/core";
 
 const Layout = styled.div`
     display: grid;
@@ -43,9 +48,24 @@ const LocationLabel = styled.span`
     color: #7d7d7d;
 `
 
+const useStyles = makeStyles((theme) => ({
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 160,
+      borderColor: theme.palette.primary,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+      
+    },
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    }
+  }));
 
-////DIALOGUE BOX////
-///////////////////
+
 
 function Cards(props){
 
@@ -68,7 +88,7 @@ function Cards(props){
         console.log(data)
     }, [data])
 
-
+   /*
    const updatedTitle = (data) =>{
        newTitle(data)
        setTitle(updatetitle)
@@ -79,20 +99,44 @@ function Cards(props){
        newDescription(data)
        setDescription(updatedescription)
        console.log(data)
-   }
+   }*/
 
-
-
+   const classes = useStyles();
+   const [sort,setSort] = useState('');
+   const handleChangeSort = (event) => {
+    setSort(event.target.value);
+  };
 
     return(
         <div>
             <Container style={{marginBottom: "20px"}}>
-                <p style={{marginLeft:"125px",marginBottom :"5px", fontSize:"0.9em"}}>
-                    Total Opportunities: <span style={{fontWeight:"600"}}>{num.total_items}</span>
-                </p>  
-
+                <div style={{display:"inline-flex", placeItems:"center", position:"relative"}}>
+                    <p style={{marginLeft:"125px",marginBottom :"5px", fontSize:"0.9em"}}>
+                        Total Opportunities: <span style={{fontWeight:"600"}}>{num.total_items}</span>
+                    </p>  
+                    <FormControl variant="outlined" color="primary" className={classes.formControl} style={{marginLeft:"650px"}}>
+                        <InputLabel color="primary" id="demo-simple-select-outlined-label">Explore</InputLabel>
+                        <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        value={sort}
+                        onChange={handleChangeSort}
+                        label="Sort"
+                        >
+                        <MenuItem value="">
+                            <em>None</em>
+                        </MenuItem>
+                        <MenuItem value={1}>Relevance</MenuItem>
+                        <MenuItem value={2}>Price: Low to High</MenuItem>
+                        <MenuItem value={3}>Newest</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
                 <hr style={{width:"80%",margin:"auto", borderBottom:"1px solid #40a3ff"}}/>
+
+                
             </Container>
+
             
              {opps.map((val)=>{
             return(
@@ -146,8 +190,8 @@ function Cards(props){
                 id = {clickedID}
                 title = {clickedTitle}
                 description = {clickedDescription}
-                updatedTitle = {updatedTitle}
-                updatedDescription = {updatedDescription}
+                //updatedTitle = {updatedTitle}
+                //updatedDescription = {updatedDescription}
             />
             
         </div>

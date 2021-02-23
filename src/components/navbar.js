@@ -14,7 +14,11 @@ const Nav = styled.nav`
     box-shadow:  0px 6px 12px -6px rgba(0,0,0,0.50);
     align-items: center;
     justify-content: center;
-    
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index:1;
 `
 
 const LogIn = styled.a`

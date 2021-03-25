@@ -35,6 +35,8 @@ const client = new AppolloClient({
   link: link,
 })
 
+const page = 1
+
 function App() {
   return (
     
@@ -42,7 +44,7 @@ function App() {
         <ApolloProvider client={client}>
           <Navbar/>  
           <Filter/> 
-          <Cards/> 
+          <Cards page={page}/> 
         </ApolloProvider>         
       </div>
    

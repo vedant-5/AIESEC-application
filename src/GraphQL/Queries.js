@@ -2,7 +2,7 @@ import {gql} from "@apollo/client";
 
 export const LOAD_OPPS = gql`
     query{
-        allOpportunity(page:1, per_page:50){
+        allOpportunity{
                 data{
                     id
                     title

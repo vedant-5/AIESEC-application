@@ -46,7 +46,7 @@ function Dialogue(props) {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter" style={{marginLeft:"20px"}}>
+          <Modal.Title id="contained-modal-title-vcenter" style={{marginLeft:"20px",fontFamily:"'Lato', sans-serif"}}>
             Edit Details of Opportunity
           </Modal.Title>
         </Modal.Header>

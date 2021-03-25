@@ -1,8 +1,7 @@
-import React ,{useEffect,useState} from "react";
+import React ,{useEffect,useState,useRef} from "react";
 import styled from "styled-components";
 
 import Dialogue from "./Dialogue";
-
 
 import { useQuery, gql} from "@apollo/client";
 import {LOAD_OPPS} from "../GraphQL/Queries"
@@ -77,6 +76,10 @@ function Cards(props){
     const [clickedTitle, setTitle] = useState("");
     const [clickedDescription, setDescription] = useState("");
 
+    const [page, setPage] = useState(props.page)
+
+    console.log(page);
+
     const [updatetitle,newTitle] = useState('')
     const [updatedescription,newDescription] = useState('')
 
@@ -140,48 +143,49 @@ function Cards(props){
             
              {opps.map((val)=>{
             return(
-                <div onClick={()=>(setClickedID(val.id),setTitle(val.title), setDescription(val.description))} key={val.id}>
-                    <Container style={{marginBottom: "10px"}}>
-                    <Layout onClick={() => setModalShow(true)}>
-                        <div style= {{gridRow:"1/5"}}>
-                            <img 
-                            style={{width: "250px", 
-                                    height: "141.5px", 
-                                    objectFit : "cover", 
-                                    borderRadius: "10px"}} 
-                            src={val.cover_photo.url}/>
-                        </div>
-                        <div 
-                        style={{display: "inline-flex",
-                                position:"relative",
-                                height:"28px"}}>
-                            <HeadLabel key={val.id}>
+                    <div onClick={()=>(setClickedID(val.id),setTitle(val.title), setDescription(val.description))} key={val.id}>
+                        <Container style={{marginBottom: "10px"}}>
+                        <Layout onClick={() => setModalShow(true)}>
+                            <div style= {{gridRow:"1/5"}}>
+                                <img 
+                                style={{width: "250px", 
+                                        height: "141.5px", 
+                                        objectFit : "cover", 
+                                        borderRadius: "10px"}} 
+                                src={val.cover_photo.url}/>
+                            </div>
+                            <div 
+                            style={{display: "inline-flex",
+                                    position:"relative",
+                                    height:"28px",
+                                    fontFamily:"'Lato', sans-serif"}}>
+                                <HeadLabel key={val.id}>
+                                    {val.title}
+                                </HeadLabel>
+                                <img style= {{position:"absolute", right:"10px"}} src={bookmark}/>
+                            </div>
+                            <div>
+                            <LocationLabel>
+                                <img src={location} style={{marginRight:"5px"}} key={val.id}/>
+                                    {val.location} 
+                            </LocationLabel>
+                            </div>
+                            <div>
+                                <DescriptionLabel key={val.id}>
+                                    {val.description}
+                                </DescriptionLabel>
+                            </div>
+                            <div 
+                            style={{display:"inline-flex", 
+                                    placeItems: "center", 
+                                    color:"#7d7d7d", 
+                                    fontSize:"0.9em"}}>
+                                <img src={circle} style={{marginRight:"5px"}} key={val.id} />
                                 {val.title}
-                            </HeadLabel>
-                            <img style= {{position:"absolute", right:"10px"}} src={bookmark}/>
-                        </div>
-                        <div>
-                        <LocationLabel>
-                            <img src={location} style={{marginRight:"5px"}} key={val.id}/>
-                                {val.location} 
-                        </LocationLabel>
-                        </div>
-                        <div>
-                            <DescriptionLabel key={val.id}>
-                                {val.description}
-                            </DescriptionLabel>
-                        </div>
-                        <div 
-                        style={{display:"inline-flex", 
-                                placeItems: "center", 
-                                color:"#7d7d7d", 
-                                fontSize:"0.9em"}}>
-                            <img src={circle} style={{marginRight:"5px"}} key={val.id} />
-                            {val.title}
-                        </div>
-                    </Layout>
-                </Container>    
-            </div>
+                            </div>
+                        </Layout>
+                    </Container>    
+                </div>
             )
         })}
             <Dialogue
